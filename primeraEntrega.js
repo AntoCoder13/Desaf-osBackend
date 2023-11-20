@@ -12,7 +12,7 @@ class ProductManager {
         if(productosExiste) return `El producto con código:$(codigo) ya existe.`
 
         const obtenerProductosPorId = this.productos.find(producto => producto.id === id)
-        if(obtenerProductosPorId) return `El producto con ID:$(id) ya existe.`
+        if(!obtenerProductosPorId) return `El producto con ID:$(id) no se encontró.`
 
         const nuevoProducto = {
             id: this.#id++,
@@ -37,7 +37,7 @@ class ProductManager {
 
 const productManager = new ProductManager()
 productManager.obtenerProductos()
-productManager.agregarProducto('Coder-Mza Eventos', 'Mendoza', 50, 250)
-productManager.agregarProducto('Coder-Cba Eventos', 'Cordoba', 80, 400)
-productManager.agregarProducto('Coder-BsAs Eventos', 'Buenos Aires', 75, 600)
+productManager.agregarProducto('Manzana Red Apple', 'La manzana más roja y dulce de todo el condado', 1500, 250)
+productManager.agregarProducto('Papel Higiénico El Suavecito', 'Se agradece la suavidad de este producto', 2500, 100)
+productManager.agregarProducto('Tequila RedField', 'Para una excelente noche con tus amigos, el mejor tequila al mejor precio', 1200, 130)
 productManager.obtenerProductos()
