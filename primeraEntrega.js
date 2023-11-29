@@ -23,15 +23,19 @@ class ProductManager {
             thumbnail, //ruta de imagen
             precio: Math.round(precio * (1 + this.#precioBaseDeGanacia)),
             descripcion,
-            stock
+            stock,
         }
     }
 }
 
-getProductById(productos, id, producto){
-    nuevoProducto = productoId
-    const productoId = this.productos.find(producto => producto.id === id)
-    if (!productoId) console.log('ID NOT FOUND.')
+getProductById(productos, id){
+    const productoId = productos.find(producto => producto.id === id);
+    if (!productoId) {
+    console.log('ID NOT FOUND.')
+    return null }
+    else {
+    return productoId;
+    }
 }
 
 const productManager = new ProductManager()
