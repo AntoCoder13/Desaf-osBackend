@@ -7,7 +7,7 @@ class ProductManager {
 
     constructor(productos = [], path) {
         this.productos = productos,
-        this.path = path
+            this.path = path
     }
 
     obtenerProductos() {
@@ -21,7 +21,7 @@ class ProductManager {
             console.error('Error al obtener los productos: ', error)
         }
     }
-    }
+
 
     agregarProducto(id, nombre, descripcion, precio, thumbnail, codigo, stock) {
         const productosExiste = this.productos.find(producto => producto.codigo === codigo)
@@ -42,33 +42,30 @@ class ProductManager {
         //this.guardarProductos()
     }
 
-    actualizarProducto(id, campo, valorNuevo){
+    actualizarProducto(id, campo, valorNuevo) {
         const productoIndex = this.productos.findIndex(producto => producto.id === id)
         if (productoIndex === -1) return `El producto con ID: ${id} no se encontró.`
 
         this.productos[productoIndex][campo] = valorNuevo
         this.guardarProductos()
-   
+
     }
 
 
     //borrarProducto()
 
-getProductById(productos, id){
-    const productoId = productos.find(producto => producto.id === id)
-    if (!productoId) {
-        console.log('ID NOT FOUND.')
-        return null
-    }
-    else return productoId;
+    getProductById(productos, id) {
+        const productoId = productos.find(producto => producto.id === id)
+        if (!productoId) {
+            console.log('ID NOT FOUND.')
+            return null
+        }
+        else return productoId;
 
-}
+    }
 }
 
 const productManager = new ProductManager()
 
-productManager.obtenerProductos()
-productManager.agregarProducto('Manzana Red Apple', 'La manzana más roja y dulce de todo el condado', 1500, 250)
-productManager.agregarProducto('Papel Higiénico El Suavecito', 'Se agradece la suavidad de este producto', 2500, 100)
-productManager.agregarProducto('Tequila RedField', 'Para una excelente noche con tus amigos, el mejor tequila al mejor precio', 1200, 130)
-productManager.obtenerProductos()
+//productManager.obtenerProductos()
+//productManager.agregarProducto()
