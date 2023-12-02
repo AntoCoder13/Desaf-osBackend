@@ -11,25 +11,16 @@ class ProductManager {
     }
 
     obtenerProductos() {
-        //return this.productos
-        /*
-        //  AGREGAR CONTENIDO
-        fs.writeFileSync('archivoProductos.txt', '{}')
-        if (fs.existsSync('archivoProductos.txt')) {
-            let contenido = fs.readFileSync('archivoProductos.txt', 'utf-8')
+        try {
+            const data = fs.readFileSync(this.path, 'utf-8')
+            const productos = JSON.parse(data)
 
-            console.log(contenido)
-
-        //  AGREGAR CONTENIDO
-            fs.appendFileSync('archivoProductos.txt', '')
-
-            contenido = fs.readFileSync('archivoProductos.txt', 'utf-8')
-            console.log(contenido)
-
-            fs.unlinkSync('archivoProductos.txt')
-        }*/
-    
-    
+            this.productos = productos
+            console.log('Productos cargados: ', this.productos)
+        } catch (error) {
+            console.error('Error al obtener los productos: ', error)
+        }
+    }
     }
 
     agregarProducto(id, nombre, descripcion, precio, thumbnail, codigo, stock) {
@@ -47,10 +38,20 @@ class ProductManager {
             descripcion,
             stock,
         }
-        this.productos.push(nuevoProducto);
+        this.productos.push(nuevoProducto)
+        //this.guardarProductos()
     }
 
-    //actualizarProducto()
+    actualizarProducto(id, campo, valorNuevo){
+        const productoIndex = this.productos.findIndex(producto => producto.id === id)
+        if (productoIndex === -1) return `El producto con ID: ${id} no se encontró.`
+
+        this.productos[productoIndex][campo] = valorNuevo
+        this.guardarProductos()
+   
+    }
+
+
     //borrarProducto()
 
 getProductById(productos, id){
@@ -63,7 +64,9 @@ getProductById(productos, id){
 
 }
 }
+
 const productManager = new ProductManager()
+
 productManager.obtenerProductos()
 productManager.agregarProducto('Manzana Red Apple', 'La manzana más roja y dulce de todo el condado', 1500, 250)
 productManager.agregarProducto('Papel Higiénico El Suavecito', 'Se agradece la suavidad de este producto', 2500, 100)

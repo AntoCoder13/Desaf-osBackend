@@ -1,0 +1,30 @@
+[
+    {
+      "id": 1,
+      "nombre": "Manzana Red Apple",
+      "descripcion": "La manzana más roja y dulce de todo el condado",
+      "precio": 1500,
+      "thumbnail": "ruta/imagen1.jpg",
+      "codigo": "MANZ001",
+      "stock": 250
+    },
+    {
+      "id": 2,
+      "nombre": "Papel Higiénico El Suavecito",
+      "descripcion": "Se agradece la suavidad de este producto",
+      "precio": 2500,
+      "thumbnail": "ruta/imagen2.jpg",
+      "codigo": "PAPEL002",
+      "stock": 100
+    },
+    {
+      "id": 3,
+      "nombre": "Tequila RedField",
+      "descripcion": "Para una excelente noche con tus amigos, el mejor tequila al mejor precio",
+      "precio": 1200,
+      "thumbnail": "ruta/imagen3.jpg",
+      "codigo": "TEQUI001",
+      "stock": 130
+    }
+  ]
+  
