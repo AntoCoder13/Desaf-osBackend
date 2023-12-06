@@ -1,12 +1,11 @@
 const fs = require('node:fs')
 
 class ProductManager {
-
     #precioBaseDeGanacia = 0.15
     #id = 1
 
-    constructor(productos = [], path) {
-        this.productos = productos,
+    constructor(path) {
+        this.productos = [],
             this.path = path
     }
 
@@ -15,16 +14,14 @@ class ProductManager {
             const data = fs.readFileSync(this.path, 'utf-8')
             const productos = JSON.parse(data)
 
-            this.productos = productos
             console.log('Productos cargados: ', this.productos)
         } catch (error) {
             console.error('Error al obtener los productos: ', error)
         }
     }
 
-
-    agregarProducto(id, nombre, descripcion, precio, thumbnail, codigo, stock) {
-        const productosExiste = this.productos.find(producto => producto.codigo === codigo)
+    agregarProducto(nombre, descripcion, precio, thumbnail, codigo, stock) {
+        /*const productosExiste = this.productos.find(producto => producto.codigo === codigo)
         if (productosExiste) return `El producto con código: ${codigo} ya existe.`
 
         const obtenerProductosPorId = this.productos.find(producto => producto.id === id)
@@ -39,7 +36,26 @@ class ProductManager {
             stock,
         }
         this.productos.push(nuevoProducto)
-        //this.guardarProductos()
+        //this.guardarProductos()*/
+        try {
+            const productoExistente = this.productos.find(producto => producto.nombre === nombre)
+            if (productoExistente) {
+                console.log(`El producto con nombre '${nombre}' ya existe.`)
+                return
+            }
+            const nuevoProducto = {
+                id: this.#id++,
+                nombre,
+                precio: Math.round(precio * (1 + this.#precioBaseDeGanacia)),
+                descripcion,
+                stock
+            }
+            this.productos.push(nuevoProducto)
+
+            fs.writeFileSync(this.path, JSON.stringify(this.productos))
+        } catch (error) {
+            console.error('Error al agregar el producto: ', error)
+        }
     }
 
     actualizarProducto(id, campo, valorNuevo) {
@@ -51,17 +67,33 @@ class ProductManager {
 
     }
 
-
     //borrarProducto()
 
-    getProductById(productos, id) {
-        const productoId = productos.find(producto => producto.id === id)
+    getProductById(id) {
+        /*const productoId = productos.find(producto => producto.id === id)
         if (!productoId) {
             console.log('ID NOT FOUND.')
             return null
         }
-        else return productoId;
+        else return productoId*/
+        try {
 
+            const contenido = fs.readFileSync(this.path, 'utf-8')
+            const productos = JSON.parse(contenido)
+            const productoId = productos.find(producto => producto.id === id)
+            if (!productoId) {
+                console.log('ID NOT FOUND.')
+                return null
+            }
+            else {
+                return productoId
+            }
+
+        } catch (error) {
+            console.error('Error al obtener el producto por ID: ', error)
+
+            return null
+        }
     }
 }
 
