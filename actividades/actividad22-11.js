@@ -34,7 +34,7 @@ class fileHandler {
 
 const fileHandler = new FileHandler("miArchivo.txt")
 
-fileHandler.writeCurrentDateTimeToFie((error) => {
+fileHandler.writeCurrentDateTimeToFile((error) => {
     if(error){
         console.log("Error al escribir el archivo", error.message)
     } else {
@@ -47,4 +47,3 @@ fileHandler.writeCurrentDateTimeToFie((error) => {
         })
     }
 })
-
