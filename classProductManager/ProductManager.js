@@ -1,4 +1,5 @@
 const fs = require('node:fs')
+const express = require('node:express')
 
 class ProductManager {
     #precioBaseDeGanacia = 0.15
